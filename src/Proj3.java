@@ -1,3 +1,10 @@
+/***
+ * @file: Proj3.java
+ * @description: Main class for the project. It contains the implementation of sorting algorithms
+ *               and methods to write the running results to output files.
+ * @author: Keira Yu
+ * @date: November 14, 2024
+ */
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;

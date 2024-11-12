@@ -4,7 +4,7 @@
  *               rank, title, theaters, total gross, release date, and distributor.
  *               Fundamental methods are included.
  * @author: Keira Yu
- * @date: October 24, 2024
+ * @date: November 14, 2024
  */
 public class Movie implements Comparable<Movie>{
     private String title;
