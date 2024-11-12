@@ -62,9 +62,10 @@ public class Proj3 {
     public static <T extends Comparable<T>> int partition (ArrayList<T> a, int left, int right) {
         T pivot = a.get(right);
         int i = left - 1;
-        for (int j = left; j < right; j++) {
-            if (a.get(j).compareTo(pivot) <= 0) {
-                swap(a, i++, j);
+        for (int j = left; j <= right - 1; j++) {
+            if (a.get(j).compareTo(pivot) < 0) {
+                i++;
+                swap(a, i, j);
             }
         }
         swap(a, i + 1, right);
@@ -197,8 +198,7 @@ public class Proj3 {
         Collections.shuffle(shuffledList);
         Collections.sort(reversedList, Collections.reverseOrder());
 
-        FileWriter fileWriter = new FileWriter("analysis.txt", true);
-        fileWriter.write("Algorithm,State,Time(ns),Comparisons,Lines\n");
+        FileWriter analysisWriter = new FileWriter("analysis.txt", true);
 
         for (String state : new String[]{"Sorted", "Shuffled", "Reversed"}) {
             ArrayList<Movie> list;
@@ -236,7 +236,7 @@ public class Proj3 {
                     break;
                 default:
                     System.err.println("Unrecognized algorithm type");
-                    fileWriter.close();
+                    analysisWriter.close();
                     return;
             }
             long endTime = System.nanoTime();
@@ -246,16 +246,16 @@ public class Proj3 {
             System.out.printf("%s Sort on %s list: Time = %d ns, Comparisons = %d\n", algorithmType, state, duration, comparisons);
 
             // Append to analysis.txt
-            fileWriter.write(String.format("%s,%s,%d,%d,%d\n", algorithmType, state, duration, comparisons, list.size()));
+            analysisWriter.write(String.format("%s,%s,%d,%d,%d\n", algorithmType, state, duration, comparisons, list.size()));
 
             // Write the sorted list to sorted.txt for each state
-            try (FileWriter writer = new FileWriter("sorted.txt", false);) {
+            try (FileWriter sortedWriter = new FileWriter("sorted.txt", false)) {
                 for (Movie movie : list) {
-                    writer.write(movie.getTitle() + "\n");
+                    sortedWriter.write(movie.getTitle() + "\n");
                 }
             }
 
         }
-        fileWriter.close();
+        analysisWriter.close();
     }
 }
