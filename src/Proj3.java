@@ -243,7 +243,7 @@ public class Proj3 {
             long duration = endTime - startTime;
 
             // Print to screen
-            System.out.printf("%s Sort on %s list: Time = %d ns, Comparisons = %d\n", algorithmType, state, duration, comparisons);
+            System.out.printf("%s Sort on %s list: %d lines, Time = %d ns, Comparisons = %d\n", algorithmType, state, numLines, duration, comparisons);
 
             // Append to analysis.txt
             analysisWriter.write(String.format("%s,%s,%d,%d,%d\n", algorithmType, state, duration, comparisons, list.size()));
@@ -251,7 +251,7 @@ public class Proj3 {
             // Write the sorted list to sorted.txt for each state
             try (FileWriter sortedWriter = new FileWriter("sorted.txt", false)) {
                 for (Movie movie : list) {
-                    sortedWriter.write(movie.getTitle() + "\n");
+                    sortedWriter.write(movie.toString() + "\n");
                 }
             }
 
